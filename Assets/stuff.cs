@@ -76,7 +76,7 @@ using System.Text;
             isWhiteTurn = !isWhiteTurn;
 
             // Update the FEN string
-            fen = ToFEN();
+            // fen = ToFEN();
         }
 
     public string ToFEN()

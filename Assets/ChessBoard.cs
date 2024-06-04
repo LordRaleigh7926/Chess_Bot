@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System.Collections.Generic;
 
     
     public class ChessBoardManager : MonoBehaviour
@@ -15,6 +15,8 @@ using UnityEngine;
         //private Pieces Piece = new Pieces();
 
         public Board chessBoard = new Board();
+
+        public List<GameObject> chessPieces = new List<GameObject>();
 
         void Start()
         {
@@ -87,6 +89,11 @@ using UnityEngine;
     void PlacePieces()
     {
         
+        foreach (GameObject obj in chessPieces)
+        {
+            Destroy(obj);
+        }
+        
             for (int i = 0; i < chessBoard.Square.Length; i++)
             {
                 int piece = chessBoard.Square[i];
@@ -102,6 +109,7 @@ using UnityEngine;
 
                     // Get the appropriate prefab based on color and type
                     GameObject piecePrefab = (color == Pieces.White) ? whitePiecePrefabs[type-1] : blackPiecePrefabs[type - 1];
+
 
                     // Place the piece on the board
                     if (piecePrefab != null)
@@ -122,6 +130,7 @@ using UnityEngine;
             {
                 GameObject piece = Instantiate(piecePrefab, position, Quaternion.identity);
                 piece.transform.localScale = new Vector3(pieceScale, pieceScale, pieceScale);
+                chessPieces.Add(piece);
             }
             else
             {
