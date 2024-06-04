@@ -7,7 +7,7 @@ public static class LegalMoves{
     void checkLegalMoves(Pieces piece){
 
         if (piece == Pieces.None) {
-            Debug.LogError("CheckLegalMoves got Pieces.None as a piece in parameter")
+            Debug.LogError("CheckLegalMoves got Pieces.None as a piece in parameter");
         }
 
         int color = piece & (Pieces.White | Pieces.Black);
