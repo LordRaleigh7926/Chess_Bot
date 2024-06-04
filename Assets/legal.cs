@@ -4,7 +4,7 @@ using System;
 public static class LegalMoves{
 
 
-    public static void checkLegalMoves(Pieces piece){
+    public static void checkLegalMoves(int piece){
 
         int color = piece & (Pieces.White | Pieces.Black);
         int type = piece & ~(Pieces.White | Pieces.Black);
