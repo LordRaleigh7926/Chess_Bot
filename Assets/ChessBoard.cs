@@ -7,12 +7,12 @@ using UnityEngine;
         public GameObject tilePrefab;
         public GameObject[] whitePiecePrefabs;
         public GameObject[] blackPiecePrefabs;
-        private int boardSize = 8;
+        private const int boardSize = 8;
         private Color customWhite = new Color(235f / 255f, 236f / 255f, 208f / 255f); // RGB values for ebecd0
         private Color customBlack = new Color(115f / 255f, 149f / 255f, 82f / 255f); // RGB values for 739552
-        private float pieceScale = 0.33f;
+        private const float pieceScale = 0.33f;
 
-        private Pieces Piece = new Pieces();
+        //private Pieces Piece = new Pieces();
 
         public Board chessBoard = new Board();
 
@@ -25,6 +25,8 @@ using UnityEngine;
             LoadPiecePrefabs();
             GenerateChessBoard();
             chessBoard.settingBoard();
+            PlacePieces();
+            chessBoard.MakeMove(12, 28);
             PlacePieces();
         }
 
@@ -72,11 +74,11 @@ using UnityEngine;
                 SpriteRenderer tileRenderer = tileObject.GetComponent<SpriteRenderer>();
                 if ((x + y) % 2 == 0)
                 {
-                    tileRenderer.color = customWhite;
+                    tileRenderer.color = customBlack;
                 }
                 else
                 {
-                    tileRenderer.color = customBlack;
+                    tileRenderer.color = customWhite;
                 }
             }
         }
@@ -92,14 +94,14 @@ using UnityEngine;
                 int col = i % 8;
                 Vector2 position = new Vector2(col, row);
 
-                if (piece != Piece.None)
+                if (piece != Pieces.None)
                 {
                     // Determine the color and type of the piece
-                    int color = piece & (Piece.White | Piece.Black);
-                    int type = piece & ~(Piece.White | Piece.Black);
+                    int color = piece & (Pieces.White | Pieces.Black);
+                    int type = piece & ~(Pieces.White | Pieces.Black);
 
                     // Get the appropriate prefab based on color and type
-                    GameObject piecePrefab = (color == Piece.White) ? whitePiecePrefabs[type] : blackPiecePrefabs[type - 1];
+                    GameObject piecePrefab = (color == Pieces.White) ? whitePiecePrefabs[type-1] : blackPiecePrefabs[type - 1];
 
                     // Place the piece on the board
                     if (piecePrefab != null)
