@@ -29,7 +29,7 @@ using System.Collections.Generic;
             chessBoard.settingBoard();
             PlacePieces();
             chessBoard.MakeMove(12, 28);
-            PlacePieces();
+            UpdatePieces(12,28);
         }
 
         void LoadPiecePrefabs()
@@ -89,41 +89,71 @@ using System.Collections.Generic;
     void PlacePieces()
     {
         
-        foreach (GameObject obj in chessPieces)
+            
+        for (int i = 0; i < chessBoard.Square.Length; i++)
         {
-            Destroy(obj);
-        }
-        
-            for (int i = 0; i < chessBoard.Square.Length; i++)
+            int piece = chessBoard.Square[i];
+            int row = i / 8;
+            int col = i % 8;
+            Vector2 position = new Vector2(col, row);
+
+            if (piece != Pieces.None)
             {
-                int piece = chessBoard.Square[i];
-                int row = i / 8;
-                int col = i % 8;
-                Vector2 position = new Vector2(col, row);
+                // Determine the color and type of the piece
+                int color = piece & (Pieces.White | Pieces.Black);
+                int type = piece & ~(Pieces.White | Pieces.Black);
 
-                if (piece != Pieces.None)
+                // Get the appropriate prefab based on color and type
+                GameObject piecePrefab = (color == Pieces.White) ? whitePiecePrefabs[type-1] : blackPiecePrefabs[type - 1];
+
+
+                // Place the piece on the board
+                if (piecePrefab != null)
                 {
-                    // Determine the color and type of the piece
-                    int color = piece & (Pieces.White | Pieces.Black);
-                    int type = piece & ~(Pieces.White | Pieces.Black);
-
-                    // Get the appropriate prefab based on color and type
-                    GameObject piecePrefab = (color == Pieces.White) ? whitePiecePrefabs[type-1] : blackPiecePrefabs[type - 1];
-
-
-                    // Place the piece on the board
-                    if (piecePrefab != null)
-                    {
-                        PlacePiece(piecePrefab, position);
-                    }
-                    else
-                    {
-                        Debug.LogError("Piece prefab is null. Check the prefab loading.");
-                    }
+                    PlacePiece(piecePrefab, position);
+                }
+                else
+                {
+                    Debug.LogError("Piece prefab is null. Check the prefab loading.");
                 }
             }
         }
+        }
 
+        void UpdatePieces(int from, int to)
+        {
+            int piece = chessBoard.Square[to];
+            int row = to / 8;
+            int col = to % 8;
+            Vector2 position = new Vector2(col, row);
+
+            if (piece != Pieces.None)
+            {
+                // Determine the color and type of the piece
+                int color = piece & (Pieces.White | Pieces.Black);
+                int type = piece & ~(Pieces.White | Pieces.Black);
+
+                // Get the appropriate prefab based on color and type
+                GameObject piecePrefab = (color == Pieces.White) ? whitePiecePrefabs[type-1] : blackPiecePrefabs[type - 1];
+
+
+                // Place the piece on the board
+                if (piecePrefab != null)
+                {
+                    PlacePiece(piecePrefab, position);
+                }
+                else
+                {
+                    Debug.LogError("Piece prefab is null. Check the prefab loading.");
+                }
+            }
+            row = from / 8;
+            col = from % 8;
+            position = new Vector2(col, row);
+            DeletePiece(position);
+
+
+        }
         void PlacePiece(GameObject piecePrefab, Vector2 position)
         {
             if (piecePrefab != null)
@@ -137,4 +167,26 @@ using System.Collections.Generic;
                 Debug.LogError("Piece prefab is null. Check the prefab loading.");
             }
         }
+        void DeletePiece(Vector2 position)
+        {
+        GameObject pieceToDelete = null;
+        foreach (GameObject piece in chessPieces)
+        {
+            if ((Vector2)piece.transform.position == position)
+            {
+                pieceToDelete = piece;
+                break;
+            }
+        }
+
+        if (pieceToDelete != null)
+        {
+            chessPieces.Remove(pieceToDelete);
+            Destroy(pieceToDelete);
+        }
+        else
+        {
+            Debug.LogError("No piece found at the given position.");
+        }
+    }
     }
