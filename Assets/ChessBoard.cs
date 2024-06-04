@@ -11,6 +11,7 @@ using System.Collections.Generic;
         private Color customWhite = new Color(235f / 255f, 236f / 255f, 208f / 255f); // RGB values for ebecd0
         private Color customBlack = new Color(115f / 255f, 149f / 255f, 82f / 255f); // RGB values for 739552
         private const float pieceScale = 0.33f;
+        public const float pieceDragDepth = -0.2f;
 
         //private Pieces Piece = new Pieces();
 
@@ -189,4 +190,34 @@ using System.Collections.Generic;
             Debug.LogError("No piece found at the given position.");
         }
     }
+
+    public Vector2Int GetGridPosition(Vector2 worldPosition)
+    {
+        float tileSize = tilePrefab.GetComponent<SpriteRenderer>().bounds.size.x;
+        int x = Mathf.RoundToInt(worldPosition.x / tileSize);
+        int y = Mathf.RoundToInt(worldPosition.y / tileSize);
+        return new Vector2Int(x, y);
+    }
+
+
+    public Vector2 GetWorldPosition(Vector2Int gridPosition)
+    {
+        float tileSize = tilePrefab.GetComponent<SpriteRenderer>().bounds.size.x;
+        return new Vector2(gridPosition.x * tileSize, gridPosition.y * tileSize);
+    }
+
+    public void MovePiece(GameObject piece, Vector2Int gridPosition)
+    {
+        Vector2 worldPosition = GetWorldPosition(gridPosition);
+        piece.transform.position = worldPosition;
+        // Update the chess board model here
+        // Example: chessBoard.MakeMove(from, to);
+    }
+
+    public bool IsValidMove(Vector2Int from, Vector2Int to)
+    {
+        // Implement logic to check if the move is valid according to chess rules
+        return true;
+    }
+
     }
