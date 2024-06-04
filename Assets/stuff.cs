@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Text;
     public class Pieces{
 
+        // Already Static
         public const int None = 0;
         public const int King = 2;
         public const int Pawn = 4;
@@ -62,6 +63,7 @@ using System.Text;
                 }
             }
         }
+
         // Set the turn information from the FEN string
         isWhiteTurn = fen.Split(' ')[1] == "w";
         
@@ -76,7 +78,7 @@ using System.Text;
             isWhiteTurn = !isWhiteTurn;
 
             // Update the FEN string
-            // fen = ToFEN();
+            fen = ToFEN();
         }
 
     public string ToFEN()
