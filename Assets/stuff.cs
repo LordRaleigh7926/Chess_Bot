@@ -68,18 +68,18 @@ using System.Text;
         isWhiteTurn = fen.Split(' ')[1] == "w";
         
     }
-        public void MakeMove(int from, int to)
-        {
+    public void MakeMove(int from, int to)
+    {
 
-            Square[to] = Square[from];
-            Square[from] = Pieces.None;
-            
-            // Toggle the turn
-            isWhiteTurn = !isWhiteTurn;
+        Square[to] = Square[from];
+        Square[from] = Pieces.None;
+        
+        // Toggle the turn
+        isWhiteTurn = !isWhiteTurn;
 
-            // Update the FEN string
-            fen = ToFEN();
-        }
+        // Update the FEN string
+        fen = ToFEN();
+    }
 
     public string ToFEN()
     {

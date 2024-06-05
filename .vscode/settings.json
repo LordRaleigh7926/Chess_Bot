@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Chess_Bot.sln"
+    "dotnet.defaultSolution": "ChessBot.sln"
 }

@@ -14,8 +14,6 @@ public class ChessBoardManager : MonoBehaviour
         private const float pieceScale = 0.33f;
         public const float pieceDragDepth = -0.2f;
 
-        //private Pieces Piece = new Pieces();
-
         public Board chessBoard = new Board();
 
         public List<GameObject> chessPieces = new List<GameObject>();
