@@ -4,13 +4,13 @@ using System;
 public static class LegalMoves{
 
 
-    public static void checkLegalMoves(int piece, int from){
+    public static void checkLegalMoves(int piece, int from, bool isWhiteTurn){
 
 
         int color = piece & (Pieces.White | Pieces.Black);
         int type = piece & ~(Pieces.White | Pieces.Black);
 
-        if (chessBoard.isWhiteTurn) { //CHECK HERE
+        if (isWhiteTurn) { //CHECK HERE
 
             if (color == Pieces.White) {
 
