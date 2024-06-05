@@ -206,17 +206,41 @@ using System.Collections.Generic;
         return new Vector2(gridPosition.x * tileSize, gridPosition.y * tileSize);
     }
 
-    public void MovePiece(GameObject piece, Vector2Int gridPosition)
+    public void MovePiece(GameObject piece, Vector2Int originalPosition, Vector2Int gridPosition )
     {
         Vector2 worldPosition = GetWorldPosition(gridPosition);
         piece.transform.position = worldPosition;
-        // Update the chess board model here
-        // Example: chessBoard.MakeMove(from, to);
+        
+        int col = gridPosition.x;
+        int row = gridPosition.y;
+        int to = row*8+col;
+
+
+        col = originalPosition.x;
+        row = originalPosition.y;
+        int from = row*8+col;
+
+        if (chessBoard.Square[to] != Pieces.None) {
+                int capturedPiece = chessBoard.Square[to];
+                DeletePiece(worldPosition);
+        }
+        
+
+        chessBoard.MakeMove(from, to);
     }
 
-    public bool IsValidMove(Vector2Int from, Vector2Int to)
+    public bool IsValidMove(Vector2Int fromVector, Vector2Int toVector)
     {
         // Implement logic to check if the move is valid according to chess rules
+        int col = toVector.x;
+        int row = toVector.y;
+        int to = row*8+col;
+
+
+        col = fromVector.x;
+        row = fromVector.y;
+        int from = row*8+col;
+
         return true;
     }
 

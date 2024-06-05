@@ -70,7 +70,7 @@ using System.Text;
     }
         public void MakeMove(int from, int to)
         {
-            // Make the move on the board
+
             Square[to] = Square[from];
             Square[from] = Pieces.None;
             

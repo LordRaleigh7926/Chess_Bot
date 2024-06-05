@@ -39,7 +39,7 @@ public class DraggablePiece : MonoBehaviour
             Vector2Int gridPosition = chessBoardManager.GetGridPosition(transform.position);
             if (chessBoardManager.IsValidMove(originalPosition, gridPosition))
             {
-                chessBoardManager.MovePiece(this.gameObject, gridPosition);
+                chessBoardManager.MovePiece(this.gameObject, originalPosition, gridPosition);
                 currentPosition = gridPosition;
             }
             else
