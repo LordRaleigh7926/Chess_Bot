@@ -1,8 +1,9 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
-    
-    public class ChessBoardManager : MonoBehaviour
+
+public class ChessBoardManager : MonoBehaviour
     {
         public GameObject tilePrefab;
         public GameObject[] whitePiecePrefabs;
@@ -29,8 +30,7 @@ using System.Collections.Generic;
             GenerateChessBoard();
             chessBoard.settingBoard();
             PlacePieces();
-            chessBoard.MakeMove(12, 28);
-            UpdatePieces(12,28);
+            
         }
 
         void LoadPiecePrefabs()
@@ -224,10 +224,10 @@ using System.Collections.Generic;
         col = gridPosition.x;
         row = gridPosition.y;
         int to = row*8+col;
-        //Debug.Log(chessBoard.Square[to]);
-        if (chessBoard.Square[to] != Pieces.None) {
+        Debug.Log("From "+from+"To "+to + " 1:"+(chessBoard.Square[to] != Pieces.None)+" 2: " + (from != to));
+        if ((chessBoard.Square[to] != Pieces.None) && (from != to)) {
                  int capturedPiece = chessBoard.Square[to];
-                 Debug.Log("Col "+col+"Row "+row+" Piece"+capturedPiece);
+                 Debug.Log("Col "+col+"Row "+row+" Piece"+capturedPiece );
                  DeletePiece(worldPosition);
         }
         
