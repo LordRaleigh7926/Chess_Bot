@@ -170,26 +170,32 @@ using System.Collections.Generic;
         }
         void DeletePiece(Vector2 position)
         {
-        GameObject pieceToDelete = null;
-        foreach (GameObject piece in chessPieces)
-        {
-            if ((Vector2)piece.transform.position == position)
+            GameObject pieceToDelete = null;
+            foreach (GameObject piece in chessPieces)
             {
-                pieceToDelete = piece;
-                break;
+                if ((Vector2)piece.transform.position == position)
+                {
+                    pieceToDelete = piece;
+                    break;
+                }
             }
-        }
 
-        if (pieceToDelete != null)
-        {
-            chessPieces.Remove(pieceToDelete);
-            Destroy(pieceToDelete);
+            if (pieceToDelete != null)
+            {
+                chessPieces.Remove(pieceToDelete);
+                Destroy(pieceToDelete);
+                int col = Mathf.RoundToInt(position.x);
+                int row = Mathf.RoundToInt(position.y);
+                int coord = row*8+col;
+                chessBoard.Square[coord]= Pieces.None;
+
+            }
+            else
+            {
+                Debug.LogError("No piece found at the given position.");
+            }
+
         }
-        else
-        {
-            Debug.LogError("No piece found at the given position.");
-        }
-    }
 
     public Vector2Int GetGridPosition(Vector2 worldPosition)
     {
@@ -209,22 +215,23 @@ using System.Collections.Generic;
     public void MovePiece(GameObject piece, Vector2Int originalPosition, Vector2Int gridPosition )
     {
         Vector2 worldPosition = GetWorldPosition(gridPosition);
-        piece.transform.position = worldPosition;
-        
-        int col = gridPosition.x;
-        int row = gridPosition.y;
-        int to = row*8+col;
+          
 
-
-        col = originalPosition.x;
-        row = originalPosition.y;
+        int col = originalPosition.x;
+        int row = originalPosition.y;
         int from = row*8+col;
 
+        col = gridPosition.x;
+        row = gridPosition.y;
+        int to = row*8+col;
+        //Debug.Log(chessBoard.Square[to]);
         if (chessBoard.Square[to] != Pieces.None) {
-                int capturedPiece = chessBoard.Square[to];
-                DeletePiece(worldPosition);
+                 int capturedPiece = chessBoard.Square[to];
+                 Debug.Log("Col "+col+"Row "+row+" Piece"+capturedPiece);
+                 DeletePiece(worldPosition);
         }
         
+        piece.transform.position = worldPosition;
 
         chessBoard.MakeMove(from, to);
     }
