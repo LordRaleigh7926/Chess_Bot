@@ -18,12 +18,12 @@ using System.Text;
 
     public class Board{
 
-        private bool isWhiteTurn = true;  // Define the isWhiteTurn variable
+        public bool isWhiteTurn = true;  // Define the isWhiteTurn variable
 
         public int[] Square;
 
-        public string fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
-
+        //public string fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+        public string fen = "rnbqkbnr/ppp1pppp/8/3p4/4P3/8/PPPP1PPP/RNBQKBNR w KQkq d6 0 1";
         public void settingBoard() {
             Square = new int[64];
 

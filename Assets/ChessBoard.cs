@@ -246,7 +246,9 @@ public class ChessBoardManager : MonoBehaviour
         row = fromVector.y;
         int from = row*8+col;
 
-        return true;
+        List<int> legalMoves =  LegalMoves.checkLegalMoves(chessBoard.Square[from],from,chessBoard);
+        Debug.Log(legalMoves.ToString());
+        return legalMoves.Contains(to);
     }
 
     }

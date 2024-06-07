@@ -1,11 +1,12 @@
 using System;
+using System.Collections.Generic;
 
 
 public static class LegalMoves{
 
 
-    public static void checkLegalMoves(int piece, int from, Board chessBoard){
-
+    public static List<int> checkLegalMoves(int piece, int from, Board chessBoard){
+        List<int> moves = new List<int>();
 
         int color = piece & (Pieces.White | Pieces.Black);
         int type = piece & ~(Pieces.White | Pieces.Black);
@@ -17,29 +18,31 @@ public static class LegalMoves{
                 switch (type) {
 
                     case Pieces.King:
-                        King.checkKingMoves(from, color, chessBoard);
+                        moves = King.checkKingMoves(from, color, chessBoard);
                         break;
 
                     case Pieces.Queen:
-                        Queen.checkQueenMoves(from, color, chessBoard);
+                        moves =Queen.checkQueenMoves(from, color, chessBoard);
                         break;
 
                     case Pieces.Rook:
-                        Rook.checkRookMoves(from, color, chessBoard);
+                        moves =Rook.checkRookMoves(from, color,chessBoard);
                         break;
 
                     case Pieces.Bishop:
-                        Bishop.checkBishopMoves(from, color, chessBoard);
+                        moves = Bishop.checkBishopMoves(from, color,chessBoard);
                         break;
                         
                     case Pieces.Pawn:
-                        Pawn.checkPawnMoves(from, color, chessBoard);
+                        moves = Pawn.checkPawnMoves(from, color, chessBoard);
                         break;
 
                     case Pieces.Knight:
-                        Knight.checkKnightMoves(from, color, chessBoard);
+                        moves = Knight.checkKnightMoves(from, color, chessBoard);
                         break;
                 }
+
+                
 
             }
         
@@ -50,32 +53,33 @@ public static class LegalMoves{
                 switch (type) {
 
                     case Pieces.King:
-                        King.checkKingMoves(from, color, chessBoard);
+                        moves =King.checkKingMoves(from, color, chessBoard);
                         break;
 
                     case Pieces.Queen:
-                        Queen.checkQueenMoves(from, color, chessBoard);
+                        moves =Queen.checkQueenMoves(from, color, chessBoard);
                         break;
 
                     case Pieces.Rook:
-                        Rook.checkRookMoves(from, color, chessBoard);
+                        moves =Rook.checkRookMoves(from, color,chessBoard);
                         break;
 
                     case Pieces.Bishop:
-                        Bishop.checkBishopMoves(from, color, chessBoard);
+                        moves = Bishop.checkBishopMoves(from, color, chessBoard);
                         break;
                         
                     case Pieces.Pawn:
-                        Pawn.checkPawnMoves(from, color, chessBoard);
+                        moves =Pawn.checkPawnMoves(from, color, chessBoard);
                         break;
 
                     case Pieces.Knight:
-                        Knight.checkKnightMoves(from, color, chessBoard);
+                        moves =Knight.checkKnightMoves(from, color, chessBoard);
                         break;
                 }
-
+                
 
             }
         }
+        return moves;
     }
 }

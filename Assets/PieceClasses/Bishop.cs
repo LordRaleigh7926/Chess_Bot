@@ -1,28 +1,28 @@
-using System;
 
+using System.Collections.Generic;
 public static class Bishop{
 
-    public static void checkBishopMoves(int from, int color, Board chessBoard){
+    public static List<int> checkBishopMoves(int from, int color, Board chessBoard){
 
-        int[] legalMovesBishop = new int[]; 
+        List<int> legalMovesBishop = new List<int>(); 
 
 
-
+        int i = 9;
         
-        while(int i = 9; i>0; i+=9) {
+        while(i>0) {
 
             try
             {
-                toTile = chessBoard.Square[from+i];
+                int toTile = chessBoard.Square[from+i];
 
                 if (toTile == Pieces.None) {
                     legalMovesBishop.Add(from+i);
                 }
                 else { 
 
-                    int color = toTile & (Pieces.White | Pieces.Black);
+                    int col = toTile & (Pieces.White | Pieces.Black);
                     
-                    if (color != color) {
+                    if (col != color) {
                         legalMovesBishop.Add(from+i);
                     } else {
                         break;
@@ -33,16 +33,17 @@ public static class Bishop{
             {
                 break;
             }
+            i+=9;
         }
 
 
+        i = 7;
 
-
-        while(int i = 7; i>0; i+=7) {
+        while(i>0) {
 
             try
             {
-                toTile = chessBoard.Square[from+i];
+                int toTile = chessBoard.Square[from+i];
 
 
                 if (toTile == Pieces.None) {
@@ -50,9 +51,9 @@ public static class Bishop{
                 }
                 else { 
 
-                    int color = toTile & (Pieces.White | Pieces.Black);
+                    int col = toTile & (Pieces.White | Pieces.Black);
                     
-                    if (color != color) {
+                    if (col != color) {
                         legalMovesBishop.Add(from+i);
                     } else {
                         break;
@@ -64,26 +65,27 @@ public static class Bishop{
                 
                 break;
             }
+            i+=7;
         }
 
 
 
+        i = 9;
 
-
-        while(int i = 9; i>0; i+=9) {
+        while( i>0) {
 
             try
             {
-                toTile = chessBoard.Square[from-i];
+                int toTile = chessBoard.Square[from-i];
 
                 if (toTile == Pieces.None) {
                     legalMovesBishop.Add(from-i);
                 }
                 else { 
 
-                    int color = toTile & (Pieces.White | Pieces.Black);
+                    int col = toTile & (Pieces.White | Pieces.Black);
                     
-                    if (color != color) {
+                    if (col != color) {
                         legalMovesBishop.Add(from-i);
                     } else {
                         break;
@@ -95,16 +97,17 @@ public static class Bishop{
                 
                 break;
             }
+            i+=9;
         }
 
 
+        i = 7;
 
-
-        while(int i = 7; i>0; i+=7) {
+        while(i>0) {
 
             try
             {
-                toTile = chessBoard.Square[from-i];
+                int toTile = chessBoard.Square[from-i];
 
 
                 if (toTile == Pieces.None) {
@@ -112,9 +115,9 @@ public static class Bishop{
                 }
                 else { 
 
-                    int color = toTile & (Pieces.White | Pieces.Black);
+                    int col = toTile & (Pieces.White | Pieces.Black);
                     
-                    if (color != color) {
+                    if (col != color) {
                         legalMovesBishop.Add(from-i);
                     } else {
                         break;
@@ -126,6 +129,8 @@ public static class Bishop{
                 
                 break;
             }
+            i+=7;
         }
+    return legalMovesBishop;
     }
 }
